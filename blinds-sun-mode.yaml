@@ -7,14 +7,13 @@ blueprint:
       name: Entity Name
       description: Name of the entity (e.g., Kitchen)
       selector:
-        text:
+        text: {}
     target_device_id:
       name: Target Device ID
       description: The device ID of the cover to control
       selector:
         device:
           integration: cover
-          domain: cover
     target_entity_id:
       name: Target Entity ID
       description: The entity ID of the cover to control
