@@ -22,9 +22,7 @@ blueprint:
 
 alias: "{{ input.entity_name }} blinds sun mode"
 description: "Controls blinds tilt based on trigger entity"
-trigger:
-  - platform: state
-    entity_id: !input trigger_entity_id
+trigger: []
 condition: []
 action:
   - service: cover.close_cover
