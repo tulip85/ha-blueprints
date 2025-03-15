@@ -1,0 +1,37 @@
+blueprint:
+  name: Blinds Sun Mode
+  description: Controls blinds tilt based on trigger entity
+  domain: automation
+  input:
+    entity_name:
+      name: Entity Name
+      description: Name of the entity (e.g., Kitchen)
+      selector:
+        text: {}
+    target_entity_id:
+      name: Target Cover Entity
+      description: The cover entity to control
+      selector:
+        entity:
+          domain: cover
+
+alias: "{{ input.entity_name }} blinds sun mode"
+description: "Controls blinds tilt based on trigger entity"
+trigger:
+  - platform: state
+    entity_id: this
+condition: []
+action:
+  - service: cover.close_cover
+    target:
+      entity_id: !input target_entity_id
+  - wait_for_trigger:
+      - platform: state
+        entity_id: !input target_entity_id
+        to: "closed"
+  - service: cover.set_cover_tilt_position
+    target:
+      entity_id: !input target_entity_id
+    data:
+      tilt_position: 100
+mode: single
