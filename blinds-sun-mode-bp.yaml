@@ -8,6 +8,11 @@ blueprint:
       description: Name of the entity (e.g., Kitchen)
       selector:
         text: {}
+    trigger_entity_id:
+      name: Trigger Entity
+      description: The entity that will trigger this automation when its state changes
+      selector:
+        entity: {}
     target_entity_id:
       name: Target Cover Entity
       description: The cover entity to control
@@ -19,7 +24,7 @@ alias: "{{ input.entity_name }} blinds sun mode"
 description: "Controls blinds tilt based on trigger entity"
 trigger:
   - platform: state
-    entity_id: this
+    entity_id: !input trigger_entity_id
 condition: []
 action:
   - service: cover.close_cover
